@@ -1,0 +1,6 @@
+version: 2
+
+models:
+  - name: stores
+    config:
+      schema: trusted_data_jose

@@ -4,3 +4,157 @@ models:
   - name: stores
     config:
       schema: trusted_data_jose
+    columns:
+      - name: store_id
+        description: Id de la Tienda
+        tests:
+          - unique
+          - not_null
+      - name: hub_id
+        description: Id de Hub
+      - name: store_name
+        description: Nombre de la Tienda
+      - name: store_segment
+        description: Nombre del Segment
+      - name: store_plan_price
+        description: Precio del Plan de la Tienda
+      - name: store_latitude
+        description: Latitud de la Tienda
+      - name: store_longitude
+        description: Longitud de la Tienda
+
+  - name: drivers
+    config:
+      schema: trusted_data_jose
+    columns:
+      - name: driver_id
+        description: Id del Drive
+      - name: driver_modal
+        description: Tipo de movilidad
+      - name: driver_type
+        description: Tipo de contrato
+
+  - name: channels
+    config:
+      schema: trusted_data_jose
+    columns:
+      - name: channel_id
+        description: Id del Canal
+      - name: channel_name
+        description: Nombre del Canal
+      - name: channel_type
+        description: Tipo de Canal
+
+  - name: deliveries
+    config:
+      schema: trusted_data_jose
+    columns:
+      - name: delivery_id
+        description: Id del Delivery
+      - name: delivery_order_id
+        description: Order Id
+      - name: driver_id
+        description: Id del Drive
+      - name: delivery_distance_meters
+        description: Distancia en metros recorrida por el Driver
+      - name: delivery_status
+        description: Estado del delivery
+
+  - name: hubs
+    config:
+      schema: trusted_data_jose
+    columns:
+      - name: hub_id
+        description: Id del Hub
+      - name: hub_name
+        description: Nombre del Hub
+      - name: hub_city
+        description: Ciudad del Hub
+      - name: hub_state
+        description: Estado del Hub
+      - name: hub_latitude
+        description: Latitud (GPS) del Hub
+      - name: hub_longitude
+        description: Longitud (GPS) del Hub
+
+  - name: orders
+    config:
+      schema: trusted_data_jose
+    columns:
+      - name: order_id
+        description: Id de la Orden
+      - name: store_id
+        description: Id de la Tienda
+      - name: channel_id
+        description: Canal de la Orden
+      - name: payment_order_id
+        description: Id del Pago
+      - name: delivery_order_id
+        description: Id del Delivery
+      - name: order_status
+        description: Estado de la Orden
+      - name: order_id
+        description: Id de la Orden
+      - name: order_amount
+        description: Monto de la Orden
+      - name: order_delivery_fee
+        description: Fees del Orden
+      - name: order_delivery_cost
+        description: Costos de la Orden
+      - name: order_created_hour
+        description: Hora de creacion de la orden
+      - name: order_created_minute
+        description: Minuto de la creacion de la Orden
+      - name: order_created_day
+        description: Dia de la creacion de la Orden
+      - name: order_created_month
+        description: Mes de la creacion de la Orden
+      - name: order_created_year
+        description: Año de la creacion de la Orden
+      - name: order_moment_created
+        description: Fecha/hora de creacion de la Orden
+      - name: order_moment_accepted
+        description: Fecha/hora de aceptacion de Orden
+      - name: order_moment_ready
+        description: Fecha/hora de Orden lista
+      - name: order_moment_collected
+        description: Fecha/hora de recoleccion de la Orden
+      - name: order_moment_in_expedition
+        description: Fecha/hora de expedicion de la Orden
+      - name: order_moment_delivering
+        description: Fecha/hora del envio de la Orden
+      - name: order_moment_delivered
+        description: Fecha/hora de entrega de la Orden
+      - name: order_moment_finished
+        description: Fecha/hora de cierre de la Orden
+      - name: order_metric_collected_time
+        description: Tiempo de recoleccion
+      - name: order_metric_paused_time
+        description: Tiempo pausado
+      - name: order_metric_production_time
+        description: Tiempo de Produccion
+      - name: order_metric_walking_time
+        description: Tiempo de recorrido
+      - name: order_metric_expediton_speed_time
+        description: Tiempo de Expedicion
+      - name: order_metric_transit_time
+        description: Tiempo de Transito
+      - name: order_metric_cycle_time
+        description: Tiempo de Cycle
+
+  - name: payments
+    config:
+      schema: trusted_data_jose
+    columns:
+      - name: payment_id
+        description: Id del Payment
+      - name: payment_order_id
+        description: Id de la Orden
+      - name: payment_amount
+        description: Monto del Pago
+      - name: payment_fee
+        description: Monto de los Fee
+      - name: payment_method
+        description: Metodo de Pago
+      - name: payment_status
+        description: Estado del Pago

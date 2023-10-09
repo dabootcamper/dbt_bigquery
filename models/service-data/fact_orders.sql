@@ -11,7 +11,7 @@ SELECT
   , o.STORE_ID
   , o.CHANNEL_ID
   , d.DRIVER_ID
-  , p.payment_method
+  , p.PAYMENT_METHOD
   , o.ORDER_STATUS
   , o.ORDER_AMOUNT
   , o.ORDER_DELIVERY_COST

@@ -1,14 +1,6 @@
 {{ config(materialized="table") }}
 
-WITH /*payment_methods AS (
-    SELECT
-        PAYMENT_ORDER_ID
-      , LISTAGG(DISTINCT PAYMENT_METHOD, ', ') WITHIN GROUP ( ORDER BY PAYMENT_METHOD) AS PAYMENT_METHODS
-    FROM {{ ref('payments') }}
-    GROUP BY 1
-)
-*/
-deliveries AS (
+WITH deliveries AS (
     SELECT *
     FROM {{ ref('deliveries') }}
     QUALIFY ROW_NUMBER() OVER(PARTITION BY DELIVERY_ORDER_ID ORDER BY DELIVERY_ID DESC) = 1

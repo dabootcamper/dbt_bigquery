@@ -1,0 +1,90 @@
+version: 2
+
+models:
+  - name: dim_time
+    description: Dimension de Tiempo
+    config:
+      schema: service_data_jose
+    columns:
+      - name: date
+        description: Fecha
+      - name: month
+        description: Mes
+      - name: quarter
+        description: Quatrimestre (Q)
+      - name: year
+        description: Año
+
+  - name: dim_channels
+    config:
+      schema: service_data_jose
+    columns:
+      - name: channel_id
+        description: Id del Canal
+      - name: channel_name
+        description: Nombre del Canal
+      - name: channel_type
+        description: Tipo de Canal
+
+
+  - name: dm_orders
+    description: Datamart de Ordenes - Delivery
+    config:
+      schema: service_data
+    columns:
+      - name: date
+        description: Fecha de la orden (ORDER_MOMENT_CREATED)
+      - name: month
+        description: Mes de ORDER_MOMENT_CREATED
+      - name: year_month
+        description: Año-Mes de ORDER_MOMENT_CREATED
+      - name: day
+        description: Nombre del Dia de ORDER_MOMENT_CREATED
+      - name: hour
+        description: Hora de ORDER_MOMENT_CREATED
+      - name: order_id
+        description: Order Id
+      - name: order_status
+        description: Estado de la Orden
+      - name: order_amount
+        description: Monto de la Orden (Reales)
+      - name: order_delivery_cost
+        description: Costo del Delivery (Reales)
+      - name: order_delivery_fee
+        description: Costo del Servicio (Reales)
+      - name: order_total_amount 
+        description: Monto total de la Orden (Reales)
+      - name: channel_name
+        description: Nombre del Canal
+      - name: store_name
+        description: Nombre de la Tienda
+      - name: store_latitude
+        description: Latitud de la Tienda
+      - name: store_longitude
+        description: Longitud de la Tienda
+      - name: hub_name
+        description: Nombre del Hub
+      - name: hub_city
+        description: Ciudad del Hub
+      - name: store_segment
+        description: Segmento de la tienda
+      - name: payment_methods
+        description: Metodos de pago
+      - name: driver_type
+        description: Tipo de Driver
+      - name: distance_km
+        description: Distancia en KM
+      - name: order_metric_collected_time
+        description: Tiempo de Collected
+      - name: order_metric_paused_time
+        description: Tiempo de pausa
+      - name: order_metric_production_time
+        description: Tiempo de Produccion
+      - name: order_metric_walking_time
+        description: Tiempo de Caminata
+      - name: order_metric_expediton_speed_time
+        description: Tiempo de expedicion
+      - name: order_metric_transit_time
+        description: Tiempo de transito
+      - name: order_metric_cycle_time
+        description: Tiempo de cycle

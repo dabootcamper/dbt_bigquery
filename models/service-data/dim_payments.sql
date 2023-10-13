@@ -5,7 +5,7 @@ WITH data AS (
     payment_order_id
     , payment_method
     , ROW_NUMBER() OVER(PARTITION BY payment_order_id ORDER BY payment_amount DESC) fila
-    FROM {{ source('delivery_raw', 'payments') }}
+    FROM {{ ref('payments') }}
     WHERE payment_status = 'PAID'
 )
 SELECT

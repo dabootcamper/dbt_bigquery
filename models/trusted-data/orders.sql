@@ -1,6 +1,7 @@
 {{ config(materialized="table") }}
 
 SELECT
+    DISTINCT
     order_id
   , COALESCE(store_id, 0) AS store_id
   , COALESCE(channel_id, 0) AS channel_id

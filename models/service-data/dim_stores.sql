@@ -12,6 +12,6 @@ SELECT
     h.hub_city,
     h.hub_state
 FROM {{ ref('stores') }} s
-    JOIN {{ ref('hubs') }} h
+    LEFT JOIN {{ ref('hubs') }} h
         ON s.hub_id = h.hub_id
-WHERE store_id IS NOT NULL
+WHERE s.store_id IS NOT NULL

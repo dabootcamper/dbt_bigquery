@@ -12,8 +12,12 @@ models:
           - not_null
       - name: hub_id
         description: Id de Hub
+        tests:
+          - not_null
       - name: store_name
         description: Nombre de la Tienda
+        tests:
+          - not_null
       - name: store_segment
         description: Nombre del Segment
       - name: store_plan_price
@@ -29,10 +33,17 @@ models:
     columns:
       - name: driver_id
         description: Id del Drive
+        tests:
+          - unique
+          - not_null
       - name: driver_modal
         description: Tipo de movilidad
+        tests:
+          - not_null
       - name: driver_type
         description: Tipo de contrato
+        tests:
+          - not_null
 
   - name: channels
     config:
@@ -40,10 +51,17 @@ models:
     columns:
       - name: channel_id
         description: Id del Canal
+        tests:
+          - unique
+          - not_null
       - name: channel_name
         description: Nombre del Canal
+        tests:
+          - not_null
       - name: channel_type
         description: Tipo de Canal
+        tests:
+          - not_null
 
   - name: deliveries
     config:
@@ -51,14 +69,23 @@ models:
     columns:
       - name: delivery_id
         description: Id del Delivery
+        tests:
+          - unique
+          - not_null
       - name: delivery_order_id
         description: Order Id
+        tests:
+          - not_null
       - name: driver_id
         description: Id del Drive
+        tests:
+          - not_null
       - name: delivery_distance_meters
         description: Distancia en metros recorrida por el Driver
       - name: delivery_status
         description: Estado del delivery
+        tests:
+          - not_null
 
   - name: hubs
     config:
@@ -66,12 +93,21 @@ models:
     columns:
       - name: hub_id
         description: Id del Hub
+        tests:
+          - unique
+          - not_null
       - name: hub_name
         description: Nombre del Hub
+        tests:
+          - not_null
       - name: hub_city
         description: Ciudad del Hub
+        tests:
+          - not_null
       - name: hub_state
         description: Estado del Hub
+        tests:
+          - not_null
       - name: hub_latitude
         description: Latitud (GPS) del Hub
       - name: hub_longitude
@@ -83,26 +119,45 @@ models:
     columns:
       - name: order_id
         description: Id de la Orden
+        tests:
+          - unique
+          - not_null
       - name: store_id
         description: Id de la Tienda
+        tests:
+          - not_null
       - name: channel_id
         description: Canal de la Orden
+        tests:
+          - not_null
       - name: payment_order_id
         description: Id del Pago
+        tests:
+          - not_null
       - name: delivery_order_id
         description: Id del Delivery
+        tests:
+          - not_null
       - name: order_status
         description: Estado de la Orden
-      - name: order_id
-        description: Id de la Orden
+        tests:
+          - not_null
       - name: order_amount
         description: Monto de la Orden
+        tests:
+          - not_null
       - name: order_delivery_fee
         description: Fees del Orden
+        tests:
+          - not_null
       - name: order_delivery_cost
         description: Costos de la Orden
+        tests:
+          - not_null
       - name: order_created_hour
         description: Hora de creacion de la orden
+        tests:
+          - not_null
       - name: order_created_minute
         description: Minuto de la creacion de la Orden
       - name: order_created_day
@@ -148,13 +203,22 @@ models:
     columns:
       - name: payment_id
         description: Id del Payment
+        tests:
+          - unique
+          - not_null
       - name: payment_order_id
         description: Id de la Orden
+        tests:
+          - not_null
       - name: payment_amount
         description: Monto del Pago
       - name: payment_fee
         description: Monto de los Fee
       - name: payment_method
         description: Metodo de Pago
+        tests:
+          - not_null
       - name: payment_status
         description: Estado del Pago
+        tests:
+          - not_null

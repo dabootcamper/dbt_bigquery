@@ -36,7 +36,3 @@ models:
   +persist_docs:
     relation: true
     columns: true
-  trusted-data:
-    materialized: table
-  service_data:
-    materialized: table

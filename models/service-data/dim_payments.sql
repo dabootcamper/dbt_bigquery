@@ -4,7 +4,7 @@ WITH data AS (
     SELECT
     payment_order_id
     , payment_method
-    , RANK() OVER(PARTITION BY payment_order_id ORDER BY payment_amount) fila
+    , ROW_NUMBER() OVER(PARTITION BY payment_order_id ORDER BY payment_amount DESC) fila
     FROM {{ source('delivery_raw', 'payments') }}
     WHERE payment_status = 'PAID'
 )

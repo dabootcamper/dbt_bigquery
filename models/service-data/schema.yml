@@ -8,83 +8,190 @@ models:
     columns:
       - name: date
         description: Fecha
+        tests:
+          - unique
+          - not_null
       - name: month
         description: Mes
+        tests:
+          - not_null
       - name: quarter
         description: Quatrimestre (Q)
+        tests:
+          - not_null
       - name: year
         description: Año
+        tests:
+          - not_null
 
-  - name: dim_channels
+  - name: fact_orders
+    description: Datamart de Ordenes - Delivery
     config:
       schema: service_data_jose
     columns:
-      - name: channel_id
-        description: Id del Canal
-      - name: channel_name
-        description: Nombre del Canal
-      - name: channel_type
-        description: Tipo de Canal
-
-
-  - name: dm_orders
-    description: Datamart de Ordenes - Delivery
-    config:
-      schema: service_data
-    columns:
       - name: date
         description: Fecha de la orden (ORDER_MOMENT_CREATED)
-      - name: month
-        description: Mes de ORDER_MOMENT_CREATED
-      - name: year_month
-        description: Año-Mes de ORDER_MOMENT_CREATED
-      - name: day
-        description: Nombre del Dia de ORDER_MOMENT_CREATED
-      - name: hour
-        description: Hora de ORDER_MOMENT_CREATED
+        tests:
+          - not_null
       - name: order_id
         description: Order Id
+        tests:
+          - unique
+          - not_null
+      - name: store_id
+        description: Store Id
+        tests:
+          - not_null
+      - name: channel_id
+        description: Channel Id
+        tests:
+          - not_null
+      - name: driver_id
+        description: Driver Id
+        tests:
+          - not_null
+      - name: payment_method
+        description: Metodo de Pago
+        tests:
+          - not_null
       - name: order_status
         description: Estado de la Orden
+        tests:
+          - not_null
       - name: order_amount
         description: Monto de la Orden (Reales)
       - name: order_delivery_cost
         description: Costo del Delivery (Reales)
       - name: order_delivery_fee
         description: Costo del Servicio (Reales)
-      - name: order_total_amount 
-        description: Monto total de la Orden (Reales)
-      - name: channel_name
-        description: Nombre del Canal
-      - name: store_name
-        description: Nombre de la Tienda
-      - name: store_latitude
-        description: Latitud de la Tienda
-      - name: store_longitude
-        description: Longitud de la Tienda
-      - name: hub_name
-        description: Nombre del Hub
-      - name: hub_city
-        description: Ciudad del Hub
-      - name: store_segment
-        description: Segmento de la tienda
-      - name: payment_methods
-        description: Metodos de pago
-      - name: driver_type
-        description: Tipo de Driver
-      - name: distance_km
-        description: Distancia en KM
+      - name: order_total_gmv
+        description: Monto Total de la Orden GMV (Reales)
+      - name: order_moment_created
+        description: Fecha y hora de la creacion de la Orden
+      - name: order_moment_finished
+        description: Fecha y hora de la Finalizacion de la Orden
+      - name: order_tiempo_transcurrido
+        description: Tiempo transcurrido entre la finalizacion de la Orden y la creacion
+      - name: order_moment_accepted
+        description: Fecha y hora de Aceptacion de la orden
+      - name: order_moment_ready
+        description: Fecha y hora de Orden Lista
+      - name: order_moment_collected
+        description: Fecha y hora de recoleccion de la Orden
+      - name: order_moment_in_expedition
+        description: Fecha y hora de Expedicion
+      - name: order_moment_delivering
+        description: Fecha y hora de Envio
+      - name: order_moment_delivered
+        description: Fecha y hora de Entrega
       - name: order_metric_collected_time
-        description: Tiempo de Collected
+        description: Tiempo de recoleccion
       - name: order_metric_paused_time
         description: Tiempo de pausa
       - name: order_metric_production_time
         description: Tiempo de Produccion
       - name: order_metric_walking_time
-        description: Tiempo de Caminata
+        description: Tiempo de Recorrido
       - name: order_metric_expediton_speed_time
         description: Tiempo de expedicion
       - name: order_metric_transit_time
-        description: Tiempo de transito
+        description: Tiempo de Transito
       - name: order_metric_cycle_time
-        description: Tiempo de cycle
+        description: Tiempo de Cycly
+      - name: delivery_distance_meters
+        description: Distancia recorrida (Metros)
+
+  - name: dim_channels
+    description: Dimension de Canales
+    config:
+      schema: service_data_jose
+    columns:
+      - name: channel_id
+        description: Id de Canal
+        tests:
+          - unique
+          - not_null
+      - name: channel_name
+        description: Nombre del Canal
+        tests:
+          - not_null
+      - name: channel_type
+        description: Tipo de Canal
+        tests:
+          - not_null
+
+  - name: dim_drivers
+    description: Dimesion de Drivers
+    config:
+      schema: service_data_jose
+    columns:
+      - name: driver_id
+        description: Id del Drive
+        tests:
+          - unique
+          - not_null
+      - name: driver_modal
+        description: Tipo de Movilidad
+        tests:
+          - not_null
+      - name: driver_type
+        description: Tipo de Contrato
+        tests:
+          - not_null
+
+
+  - name: dim_payments
+    description: Dimesion de Drivers
+    config:
+      schema: service_data_jose
+    columns:
+      - name: payment_order_id
+        description: Id de la Orden
+        tests:
+          - unique
+          - not_null
+      - name: payment_method
+        description: Metodo de Pago
+        tests:
+          - not_null
+          
+  - name: dim_stores
+    description: Dimesion de Stores y Hubs
+    config:
+      schema: service_data_jose
+    columns:
+      - name: store_id
+        description: Id de la Tienda
+        tests:
+          - unique
+          - not_null
+      - name: store_name
+        description: Nombre del Store
+        tests:
+          - not_null
+      - name: store_segment
+        description: Segmento del Store
+        tests:
+          - not_null
+      - name: store_plan_price
+        description: Precio del Plan de la Tienda
+      - name: store_latitude
+        description: Latitud de la Tienda
+      - name: store_longitude
+        description: Longitud de la Tienda
+      - name: hub_id
+        description: Id del Hub
+        tests:
+          - not_null
+      - name: hub_name
+        description: Nombre del Hub
+        tests:
+          - not_null
+      - name: hub_city
+        description: Ciudad del Hub
+        tests:
+          - not_null
+      - name: hub_state
+        description: Estado del Hub
+        tests:
+          - not_null
